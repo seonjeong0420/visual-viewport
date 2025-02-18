@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
   // 🤖 chatGPT
   function adjustChatUI() {
     const viewportHeight = window.visualViewport?.height || 0;
-    chatContainer.current?.style.setProperty("height", `${viewportHeight / 10}rem`);
+    // chatContainer.current?.style.setProperty("height", `${viewportHeight / 10}rem`);
   }
 
   useEffect(() => {
@@ -52,6 +52,33 @@ export default function Home() {
       adjustChatUI();
     });
   }, []);
+
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  // 🔹 chat-messages 내부에서는 스크롤 허용
+  const preventScroll = (e: TouchEvent) => {
+    if (chatContainer.current?.contains(e.target as Node)) return;
+    e.preventDefault(); // 🔥 외부 스크롤 방지
+  };
+  // 🔹 textarea focus 시 부드럽게 이동 (requestAnimationFrame 사용)
+  const handleFocus = () => {
+    document.body.style.overflow = "hidden";
+
+    requestAnimationFrame(() => {
+      // setIsKeyboardOpen(true);
+    });
+
+    document.addEventListener("touchmove", preventScroll, { passive: false });
+  };
+
+  const handleBlur = () => {
+    document.body.style.overflow = "";
+    document.removeEventListener("touchmove", preventScroll);
+
+    requestAnimationFrame(() => {
+      // setIsKeyboardOpen(false);
+      setKeyboardHeight(0);
+    });
+  };
 
   return (
     <main className={styles.main}>
@@ -83,17 +110,19 @@ export default function Home() {
                 name=""
                 id=""
                 className={styles.textarea}
-                onFocus={(e: React.FocusEvent<HTMLTextAreaElement>) => {
-                  const target = e.currentTarget;
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                // onFocus={(e: React.FocusEvent<HTMLTextAreaElement>) => {
+                //   const target = e.currentTarget;
 
-                  requestAnimationFrame(() => {
-                    setTimeout(() => {
-                      if (target) {
-                        target.scrollIntoView({ behavior: "smooth", block: "end" });
-                      }
-                    }, 100);
-                  });
-                }}
+                //   requestAnimationFrame(() => {
+                //     setTimeout(() => {
+                //       if (target) {
+                //         target.scrollIntoView({ behavior: "smooth", block: "end" });
+                //       }
+                //     }, 100);
+                //   });
+                // }}
               ></textarea>
             </div>
             <button className={styles.button}>BTN2</button>
