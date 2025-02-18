@@ -1,0 +1,121 @@
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  align-items: center;
+  justify-items: center;
+  min-height: 100svh;
+  padding: 80px;
+  gap: 64px;
+  font-family: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+  .logo {
+    filter: invert();
+  }
+}
+
+.visualVieportText {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin: auto;
+  color: #fff;
+  min-width: 10rem;
+  height: 5rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.chat {
+  display: flex;
+  height: 100dvh;
+}
+.chat__detail {
+  position: absolute;
+  top: 0;
+  bottom: 7.5rem;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-width: 36rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  background-color: #e1e4e8;
+}
+.chat__unit {
+  position: relative;
+}
+.chat__unit__box {
+  width: 25rem;
+  margin: 2rem 0 0 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+}
+.chat__user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 2rem;
+}
+.chat__textarea {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.chat__textarea__inner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #000;
+}
+.button {
+  padding: 0.5rem;
+  border: 0.2rem solid white;
+  border-radius: 0.2rem;
+  color: #fff;
+  text-align: center;
+}
+.box_textarea {
+  flex: 1;
+}
+.textarea {
+  width: 100%;
+  max-height: 7.6rem;
+}
