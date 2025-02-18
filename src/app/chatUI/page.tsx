@@ -70,8 +70,9 @@ const ChatUI = () => {
 .chat-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
+  height: 100dvh;
   height: 100vh;
   background: #f5f5f5;
   position: relative;
@@ -79,8 +80,9 @@ const ChatUI = () => {
 
 .chat-messages {
   flex-grow: 1; /* 🔹 키보드가 올라와도 자동 조정 */
-  padding: 16px;
-  max-height: calc(100vh - 60px); /* 기본 높이 */
+  padding: 1.6rem 1.6rem 6rem 1.6rem;
+  max-height: calc(100dvh - 6rem); /* 기본 높이 */
+  max-height: calc(100vh - 6rem);
   overflow:hidden;
   overflow-y: auto; /* 🔥 chat-messages 스크롤 유지 */
   overscroll-behavior: contain;
@@ -91,10 +93,10 @@ const ChatUI = () => {
 }
 
 p {
-height:200px;
+height:20rem;
 background-color:blue;
 color: white;
-margin: 20px 0;
+margin: 2rem 0;
 }
 .input-container {
   position: fixed;
@@ -110,11 +112,11 @@ margin: 20px 0;
 textarea {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.6rem;
   border: none;
   outline: none;
   resize: none;
-  height: 50px;
+  height: 5rem;
 }
 `}</style>
       <div ref={chatContainerRef} className="chat-container">
